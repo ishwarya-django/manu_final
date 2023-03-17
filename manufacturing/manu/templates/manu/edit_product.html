@@ -1,0 +1,104 @@
+
+
+{% extends "user/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="card p-5">
+        <h3 class="text-center">Chemical Details</h3>
+        <hr class="hr-center">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+
+                    <div class="col-md-6 mt-2">
+                        <label for="manufactured_product">Chemical&nbsp;Name&nbsp;:</label>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                      
+                        <input type="text" name="manufactured_product" class="form-control" id="manufactured_product" value="{{form.manufactured_product.value|default_if_none:''}}" ><br>
+                        
+                        <span class="text-danger">{{form.errors.manufactured_product}}</span>
+                
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mt-2">
+                      <label for="manufactured_quantity">Quantity&nbsp;:</label>
+                  </div>
+                  <div class="col-md-3 mt-2">
+                    
+                      <input type="text" name="manufactured_quantity" class="form-control" id="manufactured_quantity" value="{{form.manufactured_quantity.value|default_if_none:''}}" ><br>
+                      
+                      <span class="text-danger">{{form.errors.manufactured_quantity}}</span>
+    
+    
+              
+              </div>
+    
+              <div class="col-md-3 mt-2">
+                <select class="form-control"  class="js-example-basic-single" name="measure" required>
+                    {% if edit_product.measure %}
+                    <option value="{{edit_product.measure}}" selected>{{edit_product.measure}}</option>
+                    {% elif measure %}
+                    <option value="{{measure}}" selected>{{measure}}</option>
+                    {% else %}
+                    <option selected >select</option>
+                    {% endif %}
+                   
+                    <option value="kg">kg</option>
+                    <option value="gram">gram</option>
+                    <option value="litre">litre</option> 
+                    <option value="millilitre">millilitre</option>
+                </select>
+                <span class="text-danger">{{form.errors.measure}}</span>
+        </div>
+        
+  
+
+        
+        
+                {% comment %} <div class="col-md-6 mt-2">
+                  <label for="manufactured_quantity">Manufactured&nbsp;Quantity&nbsp;:</label>
+              </div>
+              <div class="col-md-3 mt-2">
+                
+                  <input type="text" name="manufactured_quantity" class="form-control" id="manufactured_quantity" value="{{form.manufactured_quantity.value|default_if_none:''}}" ><br>
+                  
+                  <span class="text-danger">{{form.errors.manufactured_quantity}}</span>
+                  
+          
+          </div>
+                
+          <div class="col-md-3 mt-2">
+            <select class="form-control"  class="js-example-basic-single" name="measure" required>
+                {% if measure %}
+                <option value="{{measure}}" selected>{{measure}}</option>
+                {% else %}
+                <option selected >select</option>
+                {% endif %}
+             
+               
+                <option value="kg">kg</option>
+                <option value="gram">gram</option>
+                <option value="litre">litre</option> 
+                <option value="millilitre">millilitre</option>
+            </select>
+            <span class="text-danger">{{form.errors.measure}}</span>
+    </div> {% endcomment %}
+    <hr class="hr-center">
+    <div class=" d-flex justify-content-center mt-2">
+        <button type="submit" class="btn btn-outline-success mx-1">Add</button>
+        
+    </div>
+               
+        </form>
+    </div>
+</div>
+
+
+{% endblock content %}

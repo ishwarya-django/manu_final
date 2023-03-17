@@ -1,0 +1,107 @@
+{% extends 'user/layout.html' %}
+{% load static%}
+{% block content %}
+    <style>
+        .image-holder {
+            /* width: 250px; */
+            max-width: 250px;
+            height: 150px;
+            background: #999;
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .image-holder img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        option{
+            color: black !important;
+            background-color: white !important;
+        }
+
+        #other_name,
+        #other_place,
+        #other_phone_number {
+            display: none;
+        }
+        #irregular_expense{
+            display: none;
+        }
+    </style>
+
+   <div class="container">
+    <div class="card p-5">
+        <h3 class="text-center">Add Purchase product price</h3>
+        <hr class="hr-center">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+
+                    <div class="col-md-6 mt-2">
+                        <label for="material">Purchase&nbsp;Product&nbsp;Name&nbsp;:</label>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                      
+                        <input type="text" name="material" class="form-control" id="material" value="{{product.manufactured_product}}" readonly>
+                      
+                        {% comment %} <span class="text-danger">{{form.errors.material}}</span> {% endcomment %}
+                
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="price_pro_fromshop">Unit&nbsp;Price&nbsp; :</label>
+                </div>
+                <div class="col-md-6 mt-2">
+                    {% if z %}
+                    {% for i,j in z %}
+                    <input type="text" name="price_pro_fromshop" class="form-control" id="price_pro_fromshop" value="{{i}}" required>
+                    {% if j %}<span class="text-danger">{{j}}</span>{% endif %}
+                    {% endfor %}
+                   {% elif product.unit_purchase_price %}
+                   <input type="text" name="price_pro_fromshop" class="form-control" id="price_pro_fromshop" value="{{product.unit_purchase_price }}" required>
+                   <span class="text-danger">{{form.errors.price_pro_fromshop}}</span>
+                    {% else %}
+                    <input type="text" name="price_pro_fromshop" class="form-control" id="price_pro_fromshop" value="{{form.price_pro_fromshop.value }}" required>
+                    <span class="text-danger">{{form.errors.price_pro_fromshop}}</span>
+                    {% endif%}
+            
+                 </div>
+
+              
+            </div>
+            <hr class="hr-center">
+            <div class="mt-2 text-center">
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="reset" class="btn btn-danger">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+
+    </div>
+    </div>
+
+{% endblock content %}
+{% block script %}
+
+
+$(document).ready(function () {
+    $('.js-example-basic-single').select2();
+    $('#example').DataTable();
+    $('#example1').DataTable();
+});
+function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : evt.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+{% endblock script%}
+

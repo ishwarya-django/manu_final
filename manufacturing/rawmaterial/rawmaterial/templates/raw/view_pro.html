@@ -1,0 +1,62 @@
+{% extends 'user/layout.html' %}
+{% load static%}
+{% block content %}
+
+<div class="container">
+
+    <h3 class="text-center mt-3">View Product</h3>
+   
+    <div class="card mt-3 p-5">
+        <div class="table-responsive">
+            <table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
+                <thead>
+                    <tr>
+                        <th rowspan="2">S.No</th>
+                        <th rowspan="2">Product&nbsp;Name</th>
+                        <th rowspan="2">Manufacture unit price</th>
+                        <th rowspan="2">purchase price</th>
+                        <th rowspan="2">status</th>
+                        <th rowspan="2">prfit/loss amount</th>
+                        <th rowspan="2">Action</th>
+
+
+                   
+                </thead>
+                <tbody>
+                    {% for i in pro %}
+                
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.manufactured_product}}</td>
+
+                        <td>{{i.unit_price_manu_product}}</td>
+                        <td>{{i.unit_purchase_price}}</td>
+                        {% if i.status == 'profit' %}
+                        <td class="text-success">{{i.status}}</td>
+                        {% elif i.status == 'loss' %}
+                        <td class="text-danger">{{i.status}}</td>
+                        {% else %}
+                        <td> - </td>
+                        {% endif %}
+
+                        {% if i.status == 'profit' %}
+                        <td class="text-success">{{i.price_pro_loss}}</td>
+                        {% elif i.status == 'loss' %}
+                        <td class="text-danger">{{i.price_pro_loss}}</td>
+                        {% else %}
+                        <td >{{i.price_pro_loss}}</td>
+                        {% endif %}
+                        <td> <a href="{% url 'purchase_product' i.id  %}"><i class="fa-solid fa-pen-to-square p-2 text-info" ></i></a></td>
+        
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</div>
+
+{% endblock content %}

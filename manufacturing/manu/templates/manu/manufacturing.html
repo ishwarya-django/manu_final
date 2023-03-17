@@ -1,0 +1,106 @@
+{% extends "user/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="card p-5">
+        <h3 class="text-center">Manufacture Charge Details</h3>
+        <hr class="hr-center">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+
+              <div class="col-md-6 mt-2">
+                <label for="charges_name">Chemical &nbsp;Name&nbsp;:</label>
+            </div>
+            <div class="col-md-6 mt-2">
+              
+                <input type="text" name="product" class="form-control" id="charges_name" value="{{product.manufactured_product}}"  disabled ><br>
+                
+                <span class="text-danger">{{form.errors.manufactured_product}}</span>
+        
+        </div>
+
+                    <div class="col-md-6 mt-2">
+                        <label for="charges_name">Charges&nbsp;Name&nbsp;:</label>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                      
+                        <input type="text" name="charges_name" class="form-control" id="charges_name" value="{{form.charges_name.value|default_if_none:''}}"  ><br>
+                        
+                        <span class="text-danger">{{form.errors.charges_name}}</span>
+                
+                </div>
+
+                
+                <div class="col-md-6 mt-2">
+                    <label for="product_name">Charges&nbsp;Amount&nbsp;:</label>
+                </div>
+                <div class="col-md-6 mt-2">
+                  
+                    <input type="text" name="charges_amount"   class="form-control" id="charges_amount" value="{{form.charges_amount.value|default_if_none:''}}"  ><br>
+                    
+                    <span class="text-danger">{{form.errors.charges_amount}}</span>
+            
+            </div>
+           
+        </div>
+
+         
+            <hr class="hr-center">
+            <div class="mt-2 text-center">
+                <button type="submit" class="btn btn-success">Add</button>
+                <button type="reset" class="btn btn-danger">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+    <div class="card mt-3">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Charge&nbsp;Name</th>
+              <th>Charge&nbsp;Amount</th>
+             
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in manufacture %}
+            <tr>
+              
+              <td>{{forloop.counter}}</td>
+              <td>{{i.charges_name}}</td>
+              <td>{{i.charges_amount}}</td>
+             
+            </tr>
+            {% endfor %}
+           
+          </tbody>
+        </table>
+        {% comment %} <div class="row">
+            <div class="offset-sm-6 col-sm-6">
+              <div class="card text-center p-2 mt-3">
+                <label for=""><strong>Total Manufactured Amount</strong></label>
+                <input type=""  value="{{total_charge_amount}}"  class="form-control mt-2 text-center"  readonly>
+               
+              </div>
+            </div>
+          </div> {% endcomment %}
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
+
+  
+
+
+

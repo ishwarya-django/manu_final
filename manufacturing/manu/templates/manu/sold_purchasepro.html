@@ -1,0 +1,57 @@
+{% extends 'user/layout.html' %}
+{% load static%}
+{% block content %}
+
+<div class="container">
+
+    <h3 class="text-center mt-3">Sold Purchase Chemicals</h3>
+   
+    <div class="card mt-3 p-5">
+        <div class="table-responsive">
+            <table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
+                <thead>
+                    <tr>
+                        <th rowspan="2">S.No</th>
+                        <th rowspan="2">Chemical&nbsp;Name</th>
+                        <th rowspan="2">Sell&nbsp;Quantity</th>
+                        <th rowspan="2">Quantity&nbsp;Price</th>
+                        <th rowspan="2">Total&nbsp;Amount</th>
+                        <th rowspan="2">Add sold detail</th>
+
+
+
+                        
+
+                   
+                </thead>
+                <tbody>
+                     {% for i in x %} 
+                
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.manufactured_product}}</td>
+                        <td>{{i.sell_quantity}}</td>
+                        <td>{{i.quantity_price}}</td>
+                        <td>{{i.total_sell_amount}}</td>
+
+                       
+
+                       
+                      
+                     
+                        
+
+                       <td> <a href="{% url 'sell_product_pur' i.id  %}"><i class="fa-solid fa-pen-to-square p-2 text-info" ></i></a></td> 
+        
+                    </tr>
+
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</div>
+
+{% endblock content %}

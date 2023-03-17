@@ -1,0 +1,175 @@
+{% extends 'user/layout.html' %}
+{% load static%}
+{% block content %}
+    <style>
+        .image-holder {
+            /* width: 250px; */
+            max-width: 250px;
+            height: 150px;
+            background: #999;
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .image-holder img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        option{
+            color: black !important;
+            background-color: white !important;
+        }
+
+        #other_name,
+        #other_place,
+        #other_phone_number {
+            display: none;
+        }
+        #irregular_expense{
+            display: none;
+        }
+    </style>
+
+   <div class="container">
+    <div class="card p-5">
+        <h3 class="text-center">Add Raw Material</h3>
+        <hr class="hr-center">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+
+                <div class="col-md-6 mt-2">
+                    <label for="product">Product&nbsp;Name&nbsp;:</label>
+                </div>
+                <div class="col-md-6 mt-2">
+                  
+                    <select class="form-control" class="js-example-basic-single" aria-label=".form-select-sm example" name="product" required>
+                             
+                        {% if product %}
+                        <option value="{{product}}}" selected>{{product}}</option>
+                        {% else %}
+                        <option  selected value>select product </option>
+                        {% endif %}
+                        {% for i in x %}
+                        <option value="{{i.id}}">{{i.username}} </option>
+                    
+                        {% endfor %}
+                    </select>
+                    <span class="text-danger">{{form.errors.product}}</span>
+            
+                     </div>
+
+                     <div class="col-md-6 mt-2">
+                        <label for="product">Csutomer&nbsp;Name&nbsp;:</label>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                      
+                        <select class="form-control" class="js-example-basic-single" aria-label=".form-select-sm example" name="customer" required>
+                                 
+                            {% if customer %}
+                            <option value="{{customer}}}" selected>{{customer}}</option>
+                            {% else %}
+                            <option  selected value>select customer </option>
+                            {% endif %}
+                            {% for i in x %}
+                            <option value="{{i.id}}">{{i.username}} </option>
+                        
+                            {% endfor %}
+                        </select>
+                        <span class="text-danger">{{form.errors.customer}}</span>
+                
+                         </div>
+    
+
+                    <div class="col-md-6 mt-2">
+                        <label for="material"> Quantity&nbsp;&nbsp;:</label>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                      
+                        <input type="text" name="quantity" class="form-control" id="quantity" value="{{form.quantity.value}}" required>
+                      
+                        <span class="text-danger">{{form.errors.quantity}}</span>
+                
+                    </div>
+
+                   
+                
+                     </div>
+
+                     
+                    
+                     </div>
+    
+              
+              
+
+            </div>
+            <hr class="hr-center">
+            <div class="mt-2 text-center">
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="reset" class="btn btn-danger">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+<div class="container-fluid">
+        <div class="card mt-5 p-5">
+            <div class="table-responsive">
+                <table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">S.No</th>
+                            <th rowspan="2">Product&nbsp;Name</th>
+                            <th rowspan="2">unit price</th>
+                            <th rowspan="2">Quantity</th>
+                            <th rowspan="2">Total Price</th>
+                            <th rowspan="2">Action</th>
+
+
+                       
+                    </thead>
+                    {% comment %} <tbody>
+                        {% for i in x %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{i.material}}</td>
+                            <td>{{i.unit_price}}</td>
+                            <td>{{i.quantity}} {{i.measure}}</td>
+                            <td>{{i.total_price}}</td>
+                            <td> <a href="{% url 'edit_mat' i.id  %}"><i class="fa-solid fa-pen-to-square p-2 text-info" ></i></a>
+                                <a href="{% url 'delete_raw' i.id  %}"><i class="fa-solid fa-trash p-2 text-danger" ></i></a></td>
+            
+                        </tr>
+                        {% endfor %}
+                    </tbody> {% endcomment %}
+                </table>
+            </div>
+        </div>
+    
+    </div>
+    </div>
+
+{% endblock content %}
+{% block script %}
+
+
+$(document).ready(function () {
+    $('.js-example-basic-single').select2();
+    $('#example').DataTable();
+    $('#example1').DataTable();
+});
+function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : evt.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+{% endblock script%}
+

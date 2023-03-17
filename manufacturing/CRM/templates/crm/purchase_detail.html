@@ -1,0 +1,47 @@
+{% extends 'user/layout.html' %}
+{% load static%}
+{% block content %}
+
+<div class="container">
+
+    <h3 class="text-center mt-3">View Customer Details</h3>
+   
+    <div class="card mt-3 p-5">
+        <div class="table-responsive">
+            <table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
+                <thead>
+                    <tr>
+                        <th rowspan="2">S.No</th>
+                        <th rowspan="2">Customer&nbsp;Name</th>
+                        <th rowspan="2">Phone number</th>
+                        <th rowspan="2">Email</th>
+                       
+                        <th rowspan="2">Action</th>
+
+
+                   
+                </thead>
+                <tbody>
+                    {% for i in customer %}
+                
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.name}}</td>
+
+                        <td>{{i.phone_number}}</td>
+                        <td>{{i.email}}</td>
+                       
+                      
+                       <td><a href="{% url 'purchase_product_customer' i.id  %}"><i class="fa-solid fa-pen-to-square p-2 text-info" ></i></a></td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</div>
+
+{% endblock content %}

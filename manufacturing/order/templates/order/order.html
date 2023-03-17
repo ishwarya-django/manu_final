@@ -1,0 +1,90 @@
+ {% extends 'user/layout.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="card mt-5">
+<form action="" method="post">
+    {% csrf_token%}
+
+    <div class="row">
+        <h3 class="text-center mt-3">View Order Details</h3>
+    <div class="col-md-6 mt-2">
+        <label for="quantity">Customer&nbsp;&nbsp;:</label>
+    </div>
+   
+<div class="col-md-6 mt-2">
+    <select class="form-control"  class="js-example-basic-single" name="measure" required>
+        {% if measure %}
+        <option value="{{measure}}" selected>{{measure}}</option>
+        {% else %}
+        <option selected >select</option>
+        {% endif %}
+       
+        <option value="kg">kg</option>
+        <option value="gram">gram</option>
+        <option value="litre">litre</option> 
+        <option value="millilitre">millilitre</option>
+    </select>
+    <span class="text-danger">{{form.errors.measure}}</span>
+</div>
+</div>
+               <button type="submit">Make order</button>
+               </div>
+             </div>
+              </div>
+
+</form>
+<div class="container">
+
+    {% comment %} <h3 class="text-center mt-3">View Order Details</h3> {% endcomment %}
+   
+    <div class="card mt-3 p-5">
+        <div class="table-responsive">
+            <table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
+                <thead>
+                    <tr>
+                        <th rowspan="2">S.No</th>
+                        <th rowspan="2">Customer&nbsp;Name</th>
+                        <th rowspan="2">Phone number</th>
+                        <th rowspan="2">Email</th>
+                        <th rowspan="2">Address</th>
+                
+                        <th rowspan="2">Action</th>
+
+
+                   
+                </thead>
+                {% comment %} <tbody>
+                    {% for i in customer %}
+                
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.name}}</td>
+
+                        <td>{{i.phone_number}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.doorno}} ,<br>
+                            {{i.address_line1}},{{i.address_line2}} <br>
+                            {{i.place}},{{i.district}}, <br>
+                            {{i.state}},{{i.country}}, <br>
+                            {{i.pincode}}
+                         </td>
+                      
+                       <td><a href="{% url 'edit_customer' i.id  %}"><i class="fa-solid fa-pen-to-square p-2 text-info" ></i></a>
+                        {% if i.is_active %}
+                        <a href="{% url 'deactivate_customer' i.id  %}"><i class="fa-solid fa-eye-slash p-2 text-danger" ></i></a>
+                        {% else %}
+                        <a href="{% url 'activate_customer' i.id  %}"><i class="fa-solid fa-eye eyeicon p-2 text-success" ></i></a>
+                        {% endif %}
+                    </td>
+                    </tr>
+
+                    {% endfor %} {% endcomment %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</div>
+{% endblock content %}
